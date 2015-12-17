@@ -3,6 +3,7 @@ venv
 .ipynb_checkpoints
 .~lock.2008_100_300.csv#
 requirements.txt
+.idea
 *.py[cod]
 *$py.class
 
