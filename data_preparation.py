@@ -34,3 +34,9 @@ def divide_test_train(df_binary):
     train_df = df_binary.loc[df_binary['Better'] != 0]
     return test_df, train_df
 
+
+def split_the_data_into_classes(data):
+    treat_300 = data.loc[data['Better'] == 300]
+    treat_100 = data.loc[data['Better'] == 100]
+    return treat_300, treat_100
+
