@@ -40,3 +40,19 @@ def split_the_data_into_classes(data):
     treat_100 = data.loc[data['Better'] == 100]
     return treat_300, treat_100
 
+
+def dataframe_to_string(dataframe):
+    string = dataframe.values
+    string = ['%.0f' % j for j in string]
+    string = [''.join(string[0:-1]), string[-1]]
+    # print(string)
+    return string
+
+
+def cross(line1, line2):
+    k = len(line1)
+    line1 = int(line1, 2)
+    line2 = int(line2, 2)
+    result = ("{0:0"+str(k)+"b}").format(line1 & line2)
+    return result
+
