@@ -9,7 +9,7 @@ from data_preparation import *
 
 def check_hypothesis(context300, context100, example):
     example_intent = dataframe_to_string(example)
-    labels = {"300": False, "100": False}
+    labels = {"300": 0, "100": 0}
     for i in range(0, len(context300)):
         context300_intent = dataframe_to_string(context300.iloc[i])
         intersection_intent = cross(context300_intent[0], example_intent[0])
@@ -22,7 +22,6 @@ def check_hypothesis(context300, context100, example):
         falsifications = check_involvement(intersection_intent, context300)
         if intersection_intent and not falsifications:
             labels["100"] += 1
-
     labels["300"] = float(labels["300"]) / len(context300)
     labels["100"] = float(labels["100"]) / len(context100)
     if labels["300"] > labels["100"]:
@@ -61,6 +60,7 @@ def votes_fca(data, n):
         kf_train = data.iloc[train]
         kf_test = data.iloc[test]
         res = classify(kf_train, kf_test)
+        print(res)
         stat = summary(res)
         print(stat)
 

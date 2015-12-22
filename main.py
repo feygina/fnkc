@@ -1,6 +1,7 @@
 from svm import *
 from lazy_fca import *
 from fca_votes import *
+from supp_fca import *
 
 df = read_csv('2008_100_300.csv')
 df = replace_nan_with_mean(df)
@@ -16,4 +17,4 @@ df_for_test = df_for_test.tail(240)
 #try_svm_method(train_df, test_df, 2)
 #lazy_fca(df_for_test, 2)
 #votes_fca(df_for_test, 2)
-
+supp_fca(df_for_test, 2)
