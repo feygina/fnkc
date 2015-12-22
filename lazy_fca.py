@@ -27,6 +27,7 @@ def k_fold(data, n):
 
 
 def lazy_fca(data, n):
+    total = {"accuracy": 0, "precision": 0, "recall": 0, "f1": 0}
     kf = k_fold(data, n)
     for test, train in kf:
         # print("%s %s" % (train, test))
@@ -34,7 +35,15 @@ def lazy_fca(data, n):
         kf_test = data.iloc[test]
         res = classify(kf_train, kf_test)
         stat = summary(res)
-        print(stat)
+        total["accuracy"] += stat["accuracy"]
+        total["precision"] += stat["precision"]
+        total["recall"] += stat["recall"]
+        total["f1"] += stat["f1"]
+    total["accuracy"] = total["accuracy"]/n
+    total["precision"] = total["precision"]/n
+    total["recall"] = total["recall"]/n
+    total["f1"] = total["f1"]/n
+    print(total)
 
 
 def check_hypothesis(context300, context100, example):
