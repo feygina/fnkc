@@ -33,13 +33,13 @@ def check_hypothesis(context300, context100, example):
     for i in range(0, len(context300)):
         context300_intent = dataframe_to_string(context300.iloc[i])
         intersection_intent = cross(context300_intent[0], example_intent[0])
-        support = check_involvement(intersection_intent, context100)
-        labels["300"] += float(len(support)) / len(context100)
+        support = check_involvement(intersection_intent, context300)
+        labels["300"] += float(len(support)) / len(context300)
     for i in range(0, len(context100)):
         context100_intent = dataframe_to_string(context100.iloc[i])
         intersection_intent = cross(context100_intent[0], example_intent[0])
-        support = check_involvement(intersection_intent, context300)
-        labels["100"] += float(len(support)) / len(context300)
+        support = check_involvement(intersection_intent, context100)
+        labels["100"] += float(len(support)) / len(context100)
     labels["300"] = float(labels["300"]) / len(context300)
     labels["100"] = float(labels["100"]) / len(context100)
     if labels["300"] > labels["100"]:
@@ -71,6 +71,6 @@ def check_involvement(example, current_contex):
     decisions = []
     for lo in range(0, len(current_contex)):
         new_intent = dataframe_to_string(current_contex.iloc[lo])
-        if cross(new_intent[0], example) != example:
+        if cross(new_intent[0], example) == example:
             decisions.append(True)
     return decisions
