@@ -16,6 +16,7 @@ def classify(train, test):
     for elem in range(0, l):
         result = check_hypothesis(train300, train100, test.iloc[elem])
         cv_res[result] += 1
+    print(cv_res)
     return cv_res
 
 
@@ -43,17 +44,16 @@ def check_hypothesis(context300, context100, example):
     for i in range(0, len(context300)):
         context300_intent = dataframe_to_string(context300.iloc[i])
         intersection_intent = cross(context300_intent[0], example_intent[0])
-        contradictions.append(check_involvment(intersection_intent, context100))
+        contradictions.append(check_involvement(intersection_intent, context100))
     if True not in contradictions:
         labels["300"] = True
-
+    contradictions = []
     for i in range(0, len(context100)):
         context100_intent = dataframe_to_string(context100.iloc[i])
         intersection_intent = cross(context100_intent[0], example_intent[0])
-        contradictions = [check_involvment(intersection_intent, context300)]
+        contradictions.append(check_involvement(intersection_intent, context300))
     if True not in contradictions:
         labels["100"] = True
-
     if not labels["300"] ^ labels["100"]:
         return "contradictory"
     if example_intent[-1] == "300" and labels["300"]:
@@ -66,7 +66,7 @@ def check_hypothesis(context300, context100, example):
         return "NN"
 
 
-def check_involvment(example, current_contex):
+def check_involvement(example, current_contex):
     decisions = []
     for lo in range(0, len(current_contex)):
         new_intent = dataframe_to_string(current_contex.iloc[lo])

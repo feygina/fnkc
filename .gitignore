@@ -1,6 +1,6 @@
 __pycache__/
-.idea
 venv
+.idea
 .ipynb_checkpoints
 .~lock.2008_100_300.csv#
 requirements.txt
