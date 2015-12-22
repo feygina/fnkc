@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from data_preparation import *
 
 
-def try_svm_method(train, test):
+def try_svm_method(train, test, n):
     # features that will be used for training:
     x = train.iloc[:, 0:20].values
     # target classes
@@ -18,7 +18,7 @@ def try_svm_method(train, test):
     # lin_svc = svm.LinearSVC(C=c).fit(x, y)
     rbf_svc = svm.SVC(kernel='rbf', gamma=0.7, C=c)
     # cross_val_score
-    scores = cross_validation.cross_val_score(rbf_svc, x, y, cv=10)
+    scores = cross_validation.cross_val_score(rbf_svc, x, y, cv=n)
     # results of prediction
     print("Score:", np.mean(scores))
     # train model again

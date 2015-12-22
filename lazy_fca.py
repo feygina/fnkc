@@ -1,5 +1,6 @@
 from sklearn.cross_validation import KFold
 from data_preparation import *
+from estimation import *
 
 
 def classify(train, test):
@@ -31,7 +32,8 @@ def lazy_fca(data, n):
         kf_train = data.iloc[train]
         kf_test = data.iloc[test]
         res = classify(kf_train, kf_test)
-        print(res)
+        stat = summary(res)
+        print(stat)
 
 
 def check_hypothesis(context300, context100, example):
