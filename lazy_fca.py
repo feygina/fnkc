@@ -12,10 +12,7 @@ def classify(train, test):
      "contradictory": 0,
     }
     l = len(test)
-    i = 0
     for elem in range(0, l):
-        i += 1
-        # print("%i/%i" % (i, l))
         result = check_hypothesis(train300, train100, test.iloc[elem])
         cv_res[result] += 1
     return cv_res
@@ -71,8 +68,5 @@ def check_involvment(example, current_contex):
     decisions = []
     for lo in range(0, len(current_contex)):
         new_intent = dataframe_to_string(current_contex.iloc[lo])
-        # print("new intent", new_intent[0])
-        # print("example", example)
-        # print(cross(new_intent[0], example) == example)
         decisions.append(cross(new_intent[0], example) == example)
     return True in decisions
